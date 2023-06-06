@@ -1,9 +1,6 @@
 // todo - if statement
-
-let num = parseInt(prompt("Masukkan angka : "));
-
-if (num % 2 === 0) {
-    alert(`${num} is even number.`)
-} else {
-    alert(`${num} is odd number.`)
+number = 12;
+if (typeof number != "string" && typeof number != "boolean") {
+    console.log("Benar angka");
 }
+console.log(typeof number);
