@@ -2,6 +2,7 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include <windows.h>
 
 using namespace std;
 
@@ -104,12 +105,30 @@ MenuItem drinks[sizeDrink] = {
 
 int main()
 {
-    showMenuProgram();
-    choiceMenu();
-    return 0;
+    char ulang;
+    do
+    {
+        showMenuProgram();
+        cout << endl;
+        choiceMenu();
+        cout << endl;
+        cout << "Mau Mengulang Program? (y/n) => ";
+        cin >> ulang;
+        system("cls");
+    } while (ulang == 'y' || ulang == 'Y');
+    if (ulang == 'n' || ulang == 'N')
+    {
+        cout << "Terima kasih telah menggunakan program ini";
+    }
+    else
+    {
+        system("color C");
+        cout << "\n400_ERR_INVALID_INPUT!" << endl;
+    }
 }
 
 // todo - Flow
+
 void choiceMenu()
 {
     switch (choice)
@@ -272,7 +291,6 @@ void showMenuSortingType()
         cin.ignore(123, '\n');
     }
 }
-
 
 // todo - Algorithm
 
