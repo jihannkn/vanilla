@@ -13,9 +13,11 @@ struct MenuItem
     int price;
 };
 
-void showMenuProgram(), showMenu(), choiceMenu(), sortingMenu(), showMenuSorting(), showMenuSortingOption(), showMenuSortingType();
-void displayMenu(MenuItem arr[], int n);
-void bubbleSort(MenuItem arr[], int n, bool byName, bool ascending);
+void showMenuProgram(), showMenu(), choiceMenu(), sortingMenu(),
+    showMenuSorting(), showMenuSortingOption(), showMenuSortingType(),
+    sortMenuMakanan(), sortMenuMinuman(), sortMenuAll(),
+    displayMenu(MenuItem arr[], int n),
+    bubbleSort(MenuItem arr[], int n, bool byName, bool ascending);
 
 const int sizeFood = 23;
 const int sizeDrink = 55;
@@ -137,8 +139,80 @@ void showMenu()
     cout << "\nMenu Minuman:\n";
     displayMenu(drinks, sizeDrink);
 }
+void sortMenuMakanan()
+{
+    showMenuSortingOption();
+
+    bool byName = (sortOption == 1);
+    bool ascending;
+
+    showMenuSortingType();
+
+    ascending = (sortType == 1);
+
+    bubbleSort(foods, sizeFood, byName, ascending);
+
+    cout << "\nMakanan setelah diurutkan:\n";
+    displayMenu(foods, sizeFood);
+}
+void sortMenuMinuman()
+{
+    showMenuSortingOption();
+
+    bool byName = (sortOption == 1);
+    bool ascending;
+
+    showMenuSortingType();
+
+    ascending = (sortType == 1);
+
+    bubbleSort(drinks, sizeDrink, byName, ascending);
+
+    cout << "\nMinuman setelah diurutkan:\n";
+    displayMenu(drinks, sizeDrink);
+}
+void sortMenuAll()
+{
+    showMenuSortingOption();
+
+    bool byName = (sortOption == 1);
+    bool ascending;
+
+    showMenuSortingType();
+
+    ascending = (sortType == 1);
+
+    bubbleSort(foods, sizeFood, byName, ascending);
+    bubbleSort(drinks, sizeDrink, byName, ascending);
+
+    cout << "\nMakanan setelah diurutkan:\n";
+    displayMenu(foods, sizeFood);
+    cout << "\nMinuman setelah diurutkan:\n";
+    displayMenu(drinks, sizeDrink);
+}
+void sortingMenu()
+{
+    showMenuSorting();
+    if (sortChoice == 1)
+    {
+        sortMenuMakanan();
+    }
+    else if (sortChoice == 2)
+    {
+        sortMenuMinuman();
+    }
+    else if (sortChoice == 3)
+    {
+        sortMenuAll();
+    }
+    else
+    {
+        cout << "Pilihan tidak valid.\n";
+    }
+}
 
 // todo - Console
+
 void showMenuProgram()
 {
     cout << "Menu:\n";
@@ -201,69 +275,7 @@ void showMenuSortingType()
 
 
 // todo - Algorithm
-void sortingMenu()
-{
-    showMenuSorting();
 
-    if (sortChoice == 1)
-    {
-        // Pengurutan Makanan
-        showMenuSortingOption();
-
-        bool byName = (sortOption == 1);
-        bool ascending;
-
-        showMenuSortingType();
-
-        ascending = (sortType == 1);
-
-        bubbleSort(foods, sizeFood, byName, ascending);
-
-        cout << "\nMakanan setelah diurutkan:\n";
-        displayMenu(foods, sizeFood);
-    }
-    else if (sortChoice == 2)
-    {
-        // Pengurutan Minuman
-        showMenuSortingOption();
-
-        bool byName = (sortOption == 1);
-        bool ascending;
-
-        showMenuSortingType();
-
-        ascending = (sortType == 1);
-
-        bubbleSort(drinks, sizeDrink, byName, ascending);
-
-        cout << "\nMinuman setelah diurutkan:\n";
-        displayMenu(drinks, sizeDrink);
-    }
-    else if (sortChoice == 3)
-    {
-        // Pengurutan Semua Menu
-        showMenuSortingOption();
-
-        bool byName = (sortOption == 1);
-        bool ascending;
-
-        showMenuSortingType();
-
-        ascending = (sortType == 1);
-
-        bubbleSort(foods, sizeFood, byName, ascending);
-        bubbleSort(drinks, sizeDrink, byName, ascending);
-
-        cout << "\nMakanan setelah diurutkan:\n";
-        displayMenu(foods, sizeFood);
-        cout << "\nMinuman setelah diurutkan:\n";
-        displayMenu(drinks, sizeDrink);
-    }
-    else
-    {
-        cout << "Pilihan tidak valid.\n";
-    }
-}
 void bubbleSort(MenuItem arr[], int n, bool byName, bool ascending)
 {
     for (int i = 0; i < n - 1; i++)
