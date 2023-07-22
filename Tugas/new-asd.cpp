@@ -107,24 +107,7 @@ int main()
     return 0;
 }
 
-// todo - Function Tampilan Menu
-void showMenuProgram()
-{
-    cout << "Menu:\n";
-    cout << "1. Tampilkan Semua Menu\n";
-    cout << "2. Cari Menu\n";
-    cout << "3. Pengurutan Menu\n";
-    cout << "4. Keluar\n";
-    cout << "Masukkan pilihan: ";
-    while (!(cin >> choice))
-    {
-        cout << "\n400_ERR_INVALID_INPUT!" << endl;
-        cout << "\nMasukkan Ulang Pilihan! : ";
-        cin.clear();
-        cin.ignore(123, '\n');
-    }
-}
-
+// todo - Flow
 void choiceMenu()
 {
     switch (choice)
@@ -146,7 +129,6 @@ void choiceMenu()
         break;
     }
 }
-
 void showMenu()
 {
     cout << "\nMenu Makanan:\n";
@@ -156,8 +138,23 @@ void showMenu()
     displayMenu(drinks, sizeDrink);
 }
 
-
-
+// todo - Console
+void showMenuProgram()
+{
+    cout << "Menu:\n";
+    cout << "1. Tampilkan Semua Menu\n";
+    cout << "2. Cari Menu\n";
+    cout << "3. Pengurutan Menu\n";
+    cout << "4. Keluar\n";
+    cout << "Masukkan pilihan: ";
+    while (!(cin >> choice))
+    {
+        cout << "\n400_ERR_INVALID_INPUT!" << endl;
+        cout << "\nMasukkan Ulang Pilihan! : ";
+        cin.clear();
+        cin.ignore(123, '\n');
+    }
+}
 void showMenuSorting()
 {
     cout << "\nPengurutan Menu:\n";
@@ -203,7 +200,7 @@ void showMenuSortingType()
 }
 
 
-// todo - Function Algoritma
+// todo - Algorithm
 void sortingMenu()
 {
     showMenuSorting();
@@ -267,7 +264,6 @@ void sortingMenu()
         cout << "Pilihan tidak valid.\n";
     }
 }
-
 void bubbleSort(MenuItem arr[], int n, bool byName, bool ascending)
 {
     for (int i = 0; i < n - 1; i++)
@@ -311,7 +307,6 @@ void bubbleSort(MenuItem arr[], int n, bool byName, bool ascending)
         }
     }
 }
-
 void displayMenu(MenuItem arr[], int n)
 {
     for (int i = 0; i < n; i++)
