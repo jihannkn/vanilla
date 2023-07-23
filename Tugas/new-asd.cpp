@@ -16,12 +16,15 @@ struct MenuItem
 
 void showMenuProgram(), showMenu(), choiceMenu(), sortingMenu(),
     showMenuSorting(), showMenuSortingOption(), showMenuSortingType(),
-    sortMenuMakanan(), sortMenuMinuman(), sortMenuAll(),
+    sortMenuMakanan(), sortMenuMinuman(), sortMenuAll(), searchResult(),
     displayMenu(MenuItem arr[], int n),
     bubbleSort(MenuItem arr[], int n, bool byName, bool ascending);
 
+vector<int> binarySearch(MenuItem arr[], int size, const string &partialKey);
+
 const int sizeFood = 23;
 const int sizeDrink = 55;
+const int sizeAllMenu = sizeFood + sizeDrink;
 MenuItem foods[sizeFood] = {
     {"Rambut Nenek", 6000},
     {"Klapertaart", 8000},
@@ -102,6 +105,7 @@ MenuItem drinks[sizeDrink] = {
     {"Matcha Gato", 15000},
     {"Milo Gato", 15000},
     {"Strawberry Gato", 15000}};
+MenuItem allMenu[sizeAllMenu];
 
 int main()
 {
@@ -112,11 +116,14 @@ int main()
         cout << endl;
         choiceMenu();
         cout << endl;
-        cout << "Mau Mengulang Program? (y/n) => ";
-        cin >> ulang;
+        if (exitProgram == false)
+        {
+            cout << "Mau Mengulang Program? (y/n) => ";
+            cin >> ulang;
+        }
         system("cls");
     } while (ulang == 'y' || ulang == 'Y');
-    if (ulang == 'n' || ulang == 'N')
+    if (ulang == 'n' || ulang == 'N' || exitProgram == true)
     {
         cout << "Terima kasih telah menggunakan program ini";
     }
@@ -137,13 +144,10 @@ void choiceMenu()
         showMenu();
         break;
     case 2:
-        showMenu();
+        searchResult();
         break;
     case 3:
         sortingMenu();
-        break;
-    case 4:
-        showMenu();
         break;
     default:
         cout << "Pilihan Tidak Tersedia" << endl;
@@ -229,6 +233,37 @@ void sortingMenu()
         cout << "Pilihan tidak valid.\n";
     }
 }
+void searchResult()
+{
+    int currentIndex = 0;
+    for (int i = 0; i < sizeFood; i++)
+    {
+        allMenu[currentIndex++] = foods[i];
+    }
+    for (int i = 0; i < sizeDrink; i++)
+    {
+        allMenu[currentIndex++] = drinks[i];
+    }
+    string key;
+
+    cout << "Masukkan nama menu yang ingin dicari: ";
+    cin.ignore();
+    getline(cin, key);
+    vector<int> menuDitemukan = binarySearch(allMenu, sizeAllMenu, key);
+
+    if (!menuDitemukan.empty())
+    {
+        cout << "Hasil Pencarian:\n";
+        for (int index : menuDitemukan)
+        {
+            cout << "Menu '" << allMenu[index].name << "' ditemukan: Rp" << allMenu[index].price << endl;
+        }
+    }
+    else
+    {
+        cout << "Menu dengan kata kunci '" << key << "' tidak ditemukan." << endl;
+    }
+}
 
 // todo - Console
 
@@ -238,7 +273,6 @@ void showMenuProgram()
     cout << "1. Tampilkan Semua Menu\n";
     cout << "2. Cari Menu\n";
     cout << "3. Pengurutan Menu\n";
-    cout << "4. Keluar\n";
     cout << "Masukkan pilihan: ";
     while (!(cin >> choice))
     {
@@ -296,6 +330,17 @@ void showMenuSortingType()
 
 void bubbleSort(MenuItem arr[], int n, bool byName, bool ascending)
 {
+    if (!(byName || !byName))
+    {
+        cout << "Pilihan Tidak Tersedia." << endl;
+        return;
+    }
+
+    if (!(ascending || !ascending))
+    {
+        cout << "Pilihan Tidak Tersedia." << endl;
+        return;
+    }
     for (int i = 0; i < n - 1; i++)
     {
         for (int j = 0; j < n - i - 1; j++)
@@ -344,3 +389,24 @@ void displayMenu(MenuItem arr[], int n)
         cout << "{\"" << arr[i].name << "\", " << arr[i].price << "}" << endl;
     }
 }
+vector<int> binarySearch(MenuItem arr[], int size, const string &key)
+{
+    vector<int> matches;
+    string toLower = key;
+    transform(toLower.begin(), toLower.end(), toLower.begin(), ::tolower);
+
+    for (int i = 0; i < size; i++)
+    {
+        string lowercaseName = arr[i].name;
+        transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);
+        if (lowercaseName.find(toLower) != string::npos)
+        {
+            matches.push_back(i);
+        }
+    }
+
+    return matches;
+}
+
+
+// ! - endline;

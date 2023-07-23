@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "*.css": "tailwindcss",
+        "iostream": "cpp",
+        "*.tcc": "cpp"
+    }
+}
