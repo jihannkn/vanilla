@@ -216,21 +216,20 @@ void sortMenuAll()
 void sortingMenu()
 {
     showMenuSorting();
-    if (sortChoice == 1)
+    switch (sortChoice)
     {
+    case 1:
         sortMenuMakanan();
-    }
-    else if (sortChoice == 2)
-    {
+        break;
+    case 2:
         sortMenuMinuman();
-    }
-    else if (sortChoice == 3)
-    {
+        break;
+    case 3:
         sortMenuAll();
-    }
-    else
-    {
+        break;
+    default:
         cout << "Pilihan tidak valid.\n";
+        break;
     }
 }
 void searchResult()
@@ -407,6 +406,5 @@ vector<int> binarySearch(MenuItem arr[], int size, const string &key)
 
     return matches;
 }
-
 
 // ! - endline;
